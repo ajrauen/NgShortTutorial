@@ -5,6 +5,22 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
+// Modules
+import { LoginModule } from './modules/login/login.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+
+// Services
+import { RouteGuardService } from './route-guard.service';
+
+// Routing
+import { AppRoutingModule } from './app.routing';
+
+// Redux
+import { StoreModule } from '@ngrx/store';
+
+//Reducers
+import { LoginReducers } from './modules/login/reducer/reducers';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -12,9 +28,15 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    LoginModule,
+    DashboardModule,
+    StoreModule.provideStore(LoginReducers),
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    RouteGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
